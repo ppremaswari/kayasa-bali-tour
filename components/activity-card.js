@@ -22,7 +22,7 @@ export default async function ActivityCard({ activity, rate }) {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
         {featured && (
           <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-md bg-amber-50 text-amber-800 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 ring-1 ring-amber-200/80 shadow-soft">
-            <Star size={11} className="fill-amber-600 text-amber-600" /> Unggulan
+            <Star size={11} className="fill-amber-600 text-amber-600" /> Best Seller
           </span>
         )}
         {category?.title && (
