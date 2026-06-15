@@ -11,7 +11,7 @@ export const metadata = {
     template: '%s | Kayasa Bali Tour',
   },
   description: 'Discover Bali through hand-crafted tours: sunrise volcano treks, sacred temples, jungle waterfalls and island adventures led by local guides.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
   openGraph: {
     title: 'Kayasa Bali Tour',
     description: 'Authentic, hand-crafted Bali experiences led by passionate local guides.',
