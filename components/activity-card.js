@@ -1,49 +1,60 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Clock, MapPin, Star } from 'lucide-react'
+import { Clock, MapPin, Star, ArrowUpRight } from 'lucide-react'
 import { imageUrl } from '@/sanity/lib/image'
-import { formatPrice } from '@/lib/whatsapp'
+import { formatUSDtoIDR } from '@/lib/currency'
+import { getExchangeRate } from '@/lib/currency'
+import PriceDisplay from './price-display'
 
-export default function ActivityCard({ activity }) {
+export default async function ActivityCard({ activity, rate }) {
+  // Fetch rate if not passed (allows usage from any server component)
+  const exchange = rate ? { rate } : await getExchangeRate()
   const { title, slug, shortDescription, price, duration, location, featured, coverImage, category } = activity
   const src = imageUrl(coverImage, 800)
   const href = `/activities/${slug?.current}`
 
   return (
-    <Link href={href} className="group relative flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl ring-1 ring-emerald-100 hover:ring-emerald-200 transition-all duration-300">
-      <div className="relative aspect-[4/3] overflow-hidden bg-emerald-50">
+    <Link href={href} className="group relative flex flex-col bg-white rounded-2xl overflow-hidden ring-1 ring-slate-200 hover:ring-slate-300 shadow-soft hover:shadow-soft-lg transition-all duration-300">
+      <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
         {src && (
-          <Image src={src} alt={coverImage?.alt || title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(min-width:1024px) 400px, (min-width:640px) 50vw, 100vw" />
+          <Image src={src} alt={coverImage?.alt || title} fill className="object-cover group-hover:scale-[1.04] transition-transform duration-700" sizes="(min-width:1024px) 400px, (min-width:640px) 50vw, 100vw" />
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
         {featured && (
-          <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-amber-400 text-amber-950 text-xs font-bold px-3 py-1 shadow">
-            <Star size={12} fill="currentColor" /> Featured
+          <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-md bg-amber-50 text-amber-800 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 ring-1 ring-amber-200/80 shadow-soft">
+            <Star size={11} className="fill-amber-600 text-amber-600" /> Unggulan
           </span>
         )}
         {category?.title && (
-          <span className="absolute top-3 right-3 rounded-full bg-white/95 backdrop-blur text-emerald-900 text-[11px] font-semibold uppercase tracking-wider px-3 py-1">
+          <span className="absolute top-3 right-3 rounded-md bg-white/95 backdrop-blur text-slate-700 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 ring-1 ring-slate-200/80">
             {category.title}
           </span>
         )}
       </div>
 
       <div className="p-5 flex flex-col gap-3 flex-1">
-        <h3 className="font-serif text-lg md:text-xl font-semibold text-emerald-950 leading-tight group-hover:text-emerald-700 transition">
+        <h3 className="font-serif text-[19px] md:text-xl font-semibold text-slate-900 leading-[1.2] tracking-tight">
           {title}
         </h3>
-        <p className="text-sm text-emerald-800/80 line-clamp-2 flex-1">{shortDescription}</p>
+        <p className="text-[13.5px] text-slate-600 line-clamp-2 flex-1 leading-relaxed">{shortDescription}</p>
 
-        <div className="flex items-center gap-4 text-xs text-emerald-700/80 pt-1">
-          {duration && <span className="inline-flex items-center gap-1"><Clock size={13} />{duration}</span>}
-          {location && <span className="inline-flex items-center gap-1"><MapPin size={13} />{location}</span>}
+        <div className="flex items-center gap-4 text-[12px] text-slate-500 pt-1">
+          {duration && <span className="inline-flex items-center gap-1.5"><Clock size={12.5} className="text-slate-400" />{duration}</span>}
+          {location && <span className="inline-flex items-center gap-1.5"><MapPin size={12.5} className="text-slate-400" />{location}</span>}
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-emerald-100 mt-1">
+        <div className="flex items-end justify-between pt-4 mt-1 border-t border-slate-100">
           <div>
-            <span className="text-[11px] uppercase tracking-wide text-emerald-700/70">From</span>
-            <div className="font-serif text-xl font-bold text-emerald-900">{formatPrice(price)}<span className="text-xs font-normal text-emerald-700/70"> / person</span></div>
+            <div className="text-[10px] uppercase tracking-[0.14em] text-slate-500 font-medium">Mulai dari</div>
+            <div className="font-serif text-[20px] md:text-[22px] font-semibold text-slate-900 leading-none mt-1"><PriceDisplay
+              priceUSD={price}
+              exchangeRate={exchange.rate}
+            />
+            <span className="text-[11px] font-normal text-slate-500 ml-1">/ orang</span></div>
           </div>
-          <span className="text-sm font-semibold text-emerald-600 group-hover:translate-x-1 transition-transform">View ?</span>
+          <span className="inline-flex items-center gap-1 text-[12.5px] font-medium text-slate-900 group-hover:text-emerald-800 transition">
+            Detail <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+          </span>
         </div>
       </div>
     </Link>

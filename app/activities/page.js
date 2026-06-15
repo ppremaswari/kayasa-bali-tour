@@ -13,15 +13,23 @@ export default async function ActivitiesPage() {
 
   return (
     <SiteShell>
-      <section className="relative pt-16 pb-12 bg-gradient-to-b from-emerald-900 to-emerald-950 text-white">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
-          <span className="text-xs uppercase tracking-[0.3em] text-emerald-300 font-semibold">Our Tours</span>
-          <h1 className="font-serif text-4xl md:text-6xl font-bold mt-3">Bali Activities</h1>
-          <p className="mt-4 text-emerald-100/90 max-w-2xl mx-auto">From sunrise volcanoes to sacred temples  discover the experience that&apos;s right for you.</p>
-        </div>
-      </section>
+     <section className="relative pt-24 pb-16 bg-slate-950 border-b border-white/10">
+  <div className="max-w-7xl mx-auto px-4 md:px-6 max-w-3xl">
+    <span className="text-[11px] uppercase tracking-[0.22em] text-amber-500 font-semibold">
+      Our tours
+    </span>
 
-      <section className="py-12 md:py-16">
+    <h1 className="font-serif text-4xl md:text-6xl font-medium text-white mt-3 tracking-tight leading-tight">
+      Bali activities, <span className="italic text-slate-200">curated.</span>
+    </h1>
+
+    <p className="mt-5 text-slate-400 max-w-xl text-lg leading-relaxed">
+      From sunrise volcanoes to sacred temples discover the experience that&apos;s right for you.
+    </p>
+  </div>
+</section>
+
+      <section className="py-12 md:py-16 bg-slate-50/60">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <ActivitiesGrid activities={activities} categories={categories} />
         </div>

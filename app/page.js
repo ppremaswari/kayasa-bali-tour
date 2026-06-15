@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Award, Heart, Map, ShieldCheck, Sparkles, Sun } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Award, Heart, Map, ShieldCheck, Sparkles, Compass } from 'lucide-react'
 import SiteShell from '@/components/site-shell'
 import Hero from '@/components/hero'
 import ActivityCard from '@/components/activity-card'
@@ -21,42 +21,62 @@ async function HomeContent() {
     <>
       <Hero />
 
-      {/* Intro */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-            <Image src="https://images.unsplash.com/photo-1572908721147-0a9eb395762d?w=1200&q=80" alt="Balinese culture" fill className="object-cover" sizes="(min-width:1024px) 500px, 100vw" />
+      {/* Intro / About strip */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden ring-1 ring-slate-200 shadow-soft-lg">
+              <Image src="https://images.unsplash.com/photo-1572908721147-0a9eb395762d?w=1200&q=80" alt="Balinese culture" fill className="object-cover" sizes="(min-width:1024px) 500px, 100vw" />
+            </div>
           </div>
-          <div>
-            <span className="text-xs uppercase tracking-[0.3em] text-emerald-700 font-semibold">About Kayasa</span>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-emerald-950 mt-3 leading-tight">
-              We make Bali feel like home.
+          <div className="lg:col-span-7 lg:pl-8">
+            <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-amber-700 font-semibold">
+              <Compass size={13} /> About Kayasa
+            </span>
+            <h2 className="font-serif text-3xl md:text-5xl lg:text-[56px] font-medium text-slate-900 mt-4 leading-[1.05] tracking-tight">
+              A travel atelier, <span className="italic">not a booking site.</span>
             </h2>
-            <p className="mt-5 text-emerald-900/80 text-lg leading-relaxed">
+            <p className="mt-6 text-slate-600 text-lg leading-relaxed max-w-xl">
               {settings.companyDescription}
             </p>
-            <p className="mt-4 text-emerald-900/80 leading-relaxed">
-              Every tour is led by an English-speaking local guide who grew up on the island. We skip the tourist traps and show you the Bali we love  the sunrise spots locals visit, the warungs Grandma still cooks at, and the temples that haven&apos;t made it onto Instagram (yet).
+            <p className="mt-4 text-slate-600 leading-relaxed max-w-xl">
+              Every tour is led by an English-speaking local guide who grew up on the island. We skip the tourist traps and show you the Bali we love &mdash; sunrise spots locals visit, warungs Grandma still cooks at, and temples that haven&apos;t made it onto Instagram yet.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/about" className="inline-flex items-center gap-2 text-emerald-700 font-semibold hover:text-emerald-900 transition">
-                Our story <ArrowRight size={16} />
+            <div className="mt-8">
+              <Link href="/about" className="inline-flex items-center gap-2 text-slate-900 font-semibold hover:text-emerald-800 transition group">
+                Read our story <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
               </Link>
+            </div>
+
+            <div className="mt-12 grid grid-cols-3 gap-6 pt-8 border-t border-slate-200">
+              <div>
+                <div className="font-serif text-3xl text-slate-900 font-medium">10+</div>
+                <div className="text-xs uppercase tracking-wider text-slate-500 mt-1">Years guiding</div>
+              </div>
+              <div>
+                <div className="font-serif text-3xl text-slate-900 font-medium">800+</div>
+                <div className="text-xs uppercase tracking-wider text-slate-500 mt-1">Happy travellers</div>
+              </div>
+              <div>
+                <div className="font-serif text-3xl text-slate-900 font-medium">40+</div>
+                <div className="text-xs uppercase tracking-wider text-slate-500 mt-1">Countries visited</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured activities */}
-      <section className="py-20 md:py-24 bg-gradient-to-b from-stone-50 to-emerald-50/40">
+      <section className="py-24 md:py-28 bg-slate-50/60 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
-            <div>
-              <span className="text-xs uppercase tracking-[0.3em] text-emerald-700 font-semibold">Featured</span>
-              <h2 className="font-serif text-3xl md:text-5xl font-bold text-emerald-950 mt-2">Most loved experiences</h2>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <span className="text-[11px] uppercase tracking-[0.22em] text-amber-700 font-semibold">Featured journeys</span>
+              <h2 className="font-serif text-3xl md:text-5xl font-medium text-slate-900 mt-3 tracking-tight">Hand-picked experiences.</h2>
+              <p className="mt-4 text-slate-600 max-w-xl">Our most loved Bali tours &mdash; refined over a decade of guiding.</p>
             </div>
-            <Link href="/activities" className="text-emerald-700 hover:text-emerald-900 font-semibold inline-flex items-center gap-2">
-              View all activities <ArrowRight size={16} />
+            <Link href="/activities" className="inline-flex items-center gap-2 text-slate-900 hover:text-emerald-800 font-semibold transition group">
+              View all activities <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
             </Link>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -66,25 +86,26 @@ async function HomeContent() {
       </section>
 
       {/* Why choose us */}
-      <section className="py-20 md:py-28">
+      <section className="py-24 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-14">
-            <span className="text-xs uppercase tracking-[0.3em] text-emerald-700 font-semibold">Why choose us</span>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-emerald-950 mt-2">The Kayasa difference</h2>
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <span className="text-[11px] uppercase tracking-[0.22em] text-amber-700 font-semibold">The Kayasa difference</span>
+            <h2 className="font-serif text-3xl md:text-5xl font-medium text-slate-900 mt-3 tracking-tight">Quietly excellent.</h2>
+            <p className="mt-4 text-slate-600">Why thousands of travellers trust us to design their Bali story.</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px bg-slate-200 rounded-2xl overflow-hidden ring-1 ring-slate-200 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: Heart, title: 'Local-led tours', desc: 'Every guide is born and raised in Bali  authentic stories, hidden gems.' },
+              { icon: Heart, title: 'Local-led', desc: 'Every guide is born and raised in Bali  authentic stories, hidden gems.' },
               { icon: ShieldCheck, title: 'Safety first', desc: 'Licensed drivers, insured trips, and 24/7 WhatsApp support throughout your journey.' },
-              { icon: Map, title: 'Hand-crafted itineraries', desc: 'No mass tourism. Small groups, flexible timing, and customizable stops.' },
+              { icon: Map, title: 'Hand-crafted', desc: 'No mass tourism. Small groups, flexible timing, and customizable stops.' },
               { icon: Award, title: '5-star rated', desc: 'Hundreds of glowing reviews from travellers in over 40 countries.' },
             ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="p-7 rounded-2xl bg-white ring-1 ring-emerald-100 hover:ring-emerald-300 hover:shadow-lg transition">
-                <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
-                  <Icon size={22} />
+              <div key={title} className="group p-8 bg-white hover:bg-slate-50/70 transition-colors">
+                <div className="w-11 h-11 rounded-lg bg-slate-900 text-amber-400 flex items-center justify-center mb-5 group-hover:bg-emerald-900 transition">
+                  <Icon size={18} />
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-emerald-950 mb-2">{title}</h3>
-                <p className="text-sm text-emerald-900/75 leading-relaxed">{desc}</p>
+                <h3 className="font-serif text-xl font-semibold text-slate-900 mb-2 tracking-tight">{title}</h3>
+                <p className="text-[13.5px] text-slate-600 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -94,22 +115,21 @@ async function HomeContent() {
       <Testimonials items={testimonials} />
 
       {/* CTA */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1654703942329-01d6a0a3ed62?w=2000&q=80" alt="Bali coastline" fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-900/80 to-emerald-950/90" />
-        <div className="relative max-w-4xl mx-auto px-4 md:px-6 text-center text-white">
-          <Sparkles className="mx-auto mb-4 text-amber-300" size={32} />
-          <h2 className="font-serif text-3xl md:text-6xl font-bold leading-tight">
-            Ready for your Bali story?
+      <section className="relative py-28 md:py-36 overflow-hidden bg-slate-950">
+        <Image src="https://images.unsplash.com/photo-1654703942329-01d6a0a3ed62?w=2000&q=80" alt="Bali coastline" fill className="object-cover opacity-30" sizes="100vw" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 to-slate-950" />
+        <div className="relative max-w-3xl mx-auto px-4 md:px-6 text-center text-white">
+          <Sparkles className="mx-auto mb-5 text-amber-400" size={28} />
+          <h2 className="font-serif text-3xl md:text-6xl font-medium leading-[1.05] tracking-tight">
+            Ready for your <span className="italic text-gradient-gold">Bali story</span>?
           </h2>
-          <p className="mt-5 text-lg text-emerald-50/90 max-w-2xl mx-auto leading-relaxed">
-            Tell us what you dream of  a sunrise hike, a temple ceremony, a hidden waterfall  and we&apos;ll craft it.
-            One message on WhatsApp and our team replies within minutes.
+          <p className="mt-6 text-lg text-white/70 max-w-xl mx-auto leading-relaxed font-light">
+            Tell us what you dream of. One message on WhatsApp and our team replies within minutes.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
             <WhatsAppButton label="Plan my Bali trip" message="Hello Kayasa! I'd like to plan a Bali trip. Could you help me?" />
-            <Link href="/activities" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/30 hover:bg-white/20 px-7 py-3.5 font-semibold transition">
-              Browse all tours <ArrowRight size={18} />
+            <Link href="/activities" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/[0.06] backdrop-blur-md border border-white/15 hover:bg-white/[0.12] px-6 py-3.5 text-[15px] font-semibold text-white transition">
+              Browse all tours <ArrowRight size={17} />
             </Link>
           </div>
         </div>
