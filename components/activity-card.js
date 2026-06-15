@@ -45,12 +45,12 @@ export default async function ActivityCard({ activity, rate }) {
 
         <div className="flex items-end justify-between pt-4 mt-1 border-t border-slate-100">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.14em] text-slate-500 font-medium">Mulai dari</div>
+            <div className="text-[10px] uppercase tracking-[0.14em] text-slate-500 font-medium">Start from</div>
             <div className="font-serif text-[20px] md:text-[22px] font-semibold text-slate-900 leading-none mt-1"><PriceDisplay
               priceUSD={price}
               exchangeRate={exchange.rate}
             />
-            <span className="text-[11px] font-normal text-slate-500 ml-1">/ orang</span></div>
+            <span className="text-[11px] font-normal text-slate-500 ml-1">/ pax</span></div>
           </div>
           <span className="inline-flex items-center gap-1 text-[12.5px] font-medium text-slate-900 group-hover:text-emerald-800 transition">
             Detail <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
