@@ -1,6 +1,9 @@
 import SiteShell from '@/components/site-shell'
 import ActivitiesGrid from './activities-grid'
 import { getAllActivities, getAllCategories } from '@/sanity/lib/fetch'
+import { getExchangeRate } from '@/lib/currency'
+
+const exchange = await getExchangeRate()
 
 export const revalidate = 60
 export const metadata = {
@@ -31,7 +34,7 @@ export default async function ActivitiesPage() {
 
       <section className="py-12 md:py-16 bg-slate-50/60">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <ActivitiesGrid activities={activities} categories={categories} />
+          <ActivitiesGrid activities={activities} categories={categories} exchangeRate={exchange.rate}/>
         </div>
       </section>
     </SiteShell>

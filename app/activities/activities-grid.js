@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import { Search, X } from 'lucide-react'
 import ActivityCard from '@/components/activity-card'
 
-export default function ActivitiesGrid({ activities = [], categories = [] }) {
+export default function ActivitiesGrid({ activities = [], categories = [], exchangeRate }) {
   const [q, setQ] = useState('')
   const [cat, setCat] = useState('all')
 
@@ -66,7 +66,7 @@ export default function ActivitiesGrid({ activities = [], categories = [] }) {
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((a) => <ActivityCard key={a._id} activity={a} />)}
+          {filtered.map((a) => <ActivityCard key={a._id} activity={a} exchangeRate={exchangeRate}/>)}
         </div>
       )}
     </div>

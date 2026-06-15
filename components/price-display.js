@@ -1,7 +1,10 @@
 'use client'
 
 import { useCurrency } from '@/app/currency-provider'
-import { formatUSD, formatUSDtoIDR } from '@/lib/currency'
+import {
+  formatUSD,
+  formatUSDtoIDR,
+} from '@/lib/currency-format'
 
 export default function PriceDisplay({
   priceUSD,
@@ -9,7 +12,11 @@ export default function PriceDisplay({
 }) {
   const { currency } = useCurrency()
 
-  return currency === 'USD'
-    ? formatUSD(priceUSD)
-    : formatUSDtoIDR(priceUSD, exchangeRate)
+  return (
+    <>
+      {currency === 'USD'
+        ? formatUSD(priceUSD)
+        : formatUSDtoIDR(priceUSD, exchangeRate)}
+    </>
+  )
 }

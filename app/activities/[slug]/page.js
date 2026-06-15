@@ -5,8 +5,9 @@ import SiteShell from '@/components/site-shell'
 import GalleryCarousel from '@/components/gallery-carousel'
 import WhatsAppButton from '@/components/whatsapp-button'
 import { getActivityBySlug, getAllActivitySlugs } from '@/sanity/lib/fetch'
-import { formatUSDtoIDR, getExchangeRate } from '@/lib/currency'
 import { PortableText } from '@portabletext/react'
+import PriceDisplay from '@/components/price-display'
+import { getExchangeRate } from '@/lib/currency'
 
 export const revalidate = 60
 export const dynamicParams = true
@@ -30,7 +31,6 @@ export default async function ActivityDetailPage({ params }) {
   const activity = await getActivityBySlug(params.slug)
   if (!activity) notFound()
   const exchange = await getExchangeRate()
-  const priceIDR = formatUSDtoIDR(activity.price, exchange.rate)
 
   const gallery = activity.galleryImages?.length ? activity.galleryImages : [activity.coverImage].filter(Boolean)
 
@@ -133,7 +133,12 @@ export default async function ActivityDetailPage({ params }) {
               <div className="p-7">
                 <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500 font-semibold">Start from</div>
                 <div className="mt-2 flex items-baseline gap-1 flex-wrap">
-                  <span className="font-serif text-[34px] md:text-[40px] font-medium text-slate-900 leading-none">{priceIDR}</span>
+                  <span className="font-serif text-[34px] md:text-[40px] font-medium text-slate-900 leading-none">
+                  <PriceDisplay
+                    priceUSD={activity.price}
+                    exchangeRate={exchange.rate}
+                  />
+                  </span>
                   <span className="text-slate-500 text-sm ml-1">/ pax</span>
                 </div>
                 <div className="mt-2 text-xs text-slate-500">Book via WhatsApp - Best Price Guaranteed</div>
@@ -141,7 +146,7 @@ export default async function ActivityDetailPage({ params }) {
                 <div className="mt-6 flex flex-col gap-2.5">
                   <WhatsAppButton
                     label="Reserve Now"
-                    message={`Halo Kayasa! Saya tertarik dengan "${activity.title}" (${priceIDR} / orang). Mohon info ketersediaan dan detail harga.`}
+                    message={`Halo Kayasa! Saya tertarik dengan "${activity.title}". Mohon info ketersediaan dan detail harga.`}
                     className="w-full"
                   />
                   <WhatsAppButton

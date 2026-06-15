@@ -2,13 +2,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Clock, MapPin, Star, ArrowUpRight } from 'lucide-react'
 import { imageUrl } from '@/sanity/lib/image'
-import { formatUSDtoIDR } from '@/lib/currency'
 import { getExchangeRate } from '@/lib/currency'
 import PriceDisplay from './price-display'
 
-export default async function ActivityCard({ activity, rate }) {
-  // Fetch rate if not passed (allows usage from any server component)
-  const exchange = rate ? { rate } : await getExchangeRate()
+export default function ActivityCard({
+  activity,
+  exchangeRate,
+}) {
   const { title, slug, shortDescription, price, duration, location, featured, coverImage, category } = activity
   const src = imageUrl(coverImage, 800)
   const href = `/activities/${slug?.current}`
@@ -46,10 +46,11 @@ export default async function ActivityCard({ activity, rate }) {
         <div className="flex items-end justify-between pt-4 mt-1 border-t border-slate-100">
           <div>
             <div className="text-[10px] uppercase tracking-[0.14em] text-slate-500 font-medium">Start from</div>
-            <div className="font-serif text-[20px] md:text-[22px] font-semibold text-slate-900 leading-none mt-1"><PriceDisplay
-              priceUSD={price}
-              exchangeRate={exchange.rate}
-            />
+            <div className="font-serif text-[20px] md:text-[22px] font-semibold text-slate-900 leading-none mt-1">
+              <PriceDisplay
+                priceUSD={price}
+                exchangeRate={exchangeRate}
+              />
             <span className="text-[11px] font-normal text-slate-500 ml-1">/ pax</span></div>
           </div>
           <span className="inline-flex items-center gap-1 text-[12.5px] font-medium text-slate-900 group-hover:text-emerald-800 transition">
