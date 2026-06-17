@@ -17,6 +17,9 @@ export const metadata = {
     description: 'Authentic, hand-crafted Bali experiences led by passionate local guides.',
     type: 'website',
   },
+    icons: {
+    icon: '/icon.svg',
+  },
 }
 
 export default function RootLayout({ children }) {
